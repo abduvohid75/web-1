@@ -1,5 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import time
+from urllib.parse import urlparse, parse_qs
 
 # Для начала определим настройки запуска
 hostName = "localhost"  # Адрес для доступа по сети
@@ -17,7 +17,7 @@ class MyServer(BaseHTTPRequestHandler):
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-  <title>Контакты</title>
+  <title>asdasds Page</title>
   <style>
     .sidebar {
       background-color: #040026;
@@ -74,21 +74,22 @@ class MyServer(BaseHTTPRequestHandler):
 
 
         <!-- Example single danger button -->
+    <form>
       </div>
       <div class="col-sm-9 contacts">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Имя" aria-label="Username" aria-describedby="basic-addon1">
+          <input name="name" type="text" class="form-control" placeholder="Имя" aria-label="Username" aria-describedby="basic-addon1">
         </div>
         
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon2">@</span>
-          <input type="text" class="form-control" placeholder="Почта" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <input name="email" type="text" class="form-control" placeholder="Почта" aria-label="Recipient's username" aria-describedby="basic-addon2">
         </div>
     
         
         <div class="input-group">
           <span class="input-group-text">Сообщение</span>
-          <textarea class="form-control" aria-label="Сообщение"></textarea>
+          <textarea name="message" class="form-control" aria-label="Сообщение"></textarea>
         </div>
         <style type="text/css"> 
           button[name="run_script"] { 
@@ -106,7 +107,8 @@ class MyServer(BaseHTTPRequestHandler):
             background: #c70000;
           } 
         </style>
-        <button type="button" name="run_script">Отправить</button>
+        <button type="submit" name="run_script">Отправить</button>
+        </form>
             </div>
           </div>
         </div>
@@ -122,11 +124,15 @@ class MyServer(BaseHTTPRequestHandler):
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-        """
+"""
 
     def do_GET(self):
         """ Метод для обработки входящих GET-запросов """
+        query_components = parse_qs(urlparse(self.path).query)
         page_content = self.__get_html_content()
+
+        print(query_components)
+
         self.send_response(200)  # Отправка кода ответа
         self.send_header("Content-type", "text/html")  # Отправка типа данных, который будет передаваться
         self.end_headers()  # Завершение формирования заголовков ответа
