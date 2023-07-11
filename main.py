@@ -8,10 +8,129 @@ serverPort = 8080  # Порт для доступа по сети
 
 class MyServer(BaseHTTPRequestHandler):
     def __get_html_content(self):
-        with open('contact.html', 'r', encoding='utf-8') as file:
-            html_code = file.read()
 
-        return html_code
+        return """
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <title>asdasds Page</title>
+    <style>
+    .sidebar {
+      background-color: #040026;
+      color: #fff;
+      height: 100vh;
+      padding: 20px;
+      width: 400px;
+    }
+
+    .content {
+      padding: 70px;
+      margin-top: 250px;
+      text-align: center;
+    }
+
+    .product {
+      border: 1px  solid #000000;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .contacts{
+      padding: 70px;
+      margin-top: 250px;
+      text-align: center;
+    }
+
+
+
+
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 sidebar" height="100px">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="categories.html">Категории</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="catalog.html">Заказы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Контакты</a>
+                </li>
+            </ul>
+            <div class="btn-group" style="margin-top: 75vh">
+                <a class="btn btn-secondary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                   aria-expanded="false">Пользователь</a>
+            </div>
+
+
+            <!-- Example single danger button -->
+        </div>
+        <div class="col-sm-9 contacts">
+            <form>
+            <div class="input-group mb-3">
+                <input type="text" name="name" class="form-control" placeholder="Имя" aria-label="Username"
+                       aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2">@</span>
+                <input type="text" name="email" class="form-control" placeholder="Почта" aria-label="Recipient's username"
+                       aria-describedby="basic-addon2">
+            </div>
+
+
+            <div class="input-group">
+                <span class="input-group-text">Сообщение</span>
+                <textarea class="form-control" name="message" aria-label="Сообщение"></textarea>
+            </div>
+            <style type="text/css">
+          button[name="run_script"] { 
+            margin-top: 10px;
+            border: none;
+            border-radius: 7px;5
+            padding: 10px 25px;
+            background: #00033f;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: white;
+          }
+          button[name="run_script"]:hover { 
+            background: #c70000;
+          } 
+
+
+            </style>
+            <button type="submit" name="run_script">Отправить</button>
+
+
+        </form>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+        """
 
     def do_GET(self):
         """ Метод для обработки входящих GET-запросов """
